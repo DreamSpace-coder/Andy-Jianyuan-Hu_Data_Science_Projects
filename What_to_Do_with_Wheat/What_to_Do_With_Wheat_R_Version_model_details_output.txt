@@ -1,0 +1,64 @@
+/* Commodity_Supply_Management_Schedule */
+
+/* Objective function */
+max: -0.2256 wheat_to_buy_2022_July -0.2287 wheat_to_buy_2022_September -0.2356 wheat_to_buy_2022_December
+ -0.259 wheat_to_buy_2023_March -0.2388 wheat_to_buy_2023_May -0.222 wheat_to_buy_2023_July -0.225 wheat_to_buy_2023_September
+ -0.2271 wheat_to_buy_2023_December -0.2042 wheat_to_buy_2024_March -0.1837 wheat_to_buy_2024_July +0.22325 wheat_to_sell_2022_July
+ +0.2253 wheat_to_sell_2022_September +0.2259 wheat_to_sell_2022_December +0.2284 wheat_to_sell_2023_March
+ +0.222 wheat_to_sell_2023_May +0.21 wheat_to_sell_2023_July +0.1536 wheat_to_sell_2023_September +0.20305 wheat_to_sell_2023_December
+ +0.199096 wheat_to_sell_2024_March +0.1622 wheat_to_sell_2024_July -0.022325 ending_inventory_2022_July
+ -0.02253 ending_inventory_2022_September -0.02259 ending_inventory_2022_December -0.02284 ending_inventory_2023_March
+ -0.0222 ending_inventory_2023_May -0.021 ending_inventory_2023_July -0.01536 ending_inventory_2023_September
+ -0.020305 ending_inventory_2023_December -0.0199096 ending_inventory_2024_March -0.01622 ending_inventory_2024_July;
+
+/* Constraints */
+sell<=beginning_inventory_2022_July: +wheat_to_sell_2022_July <= 6000;
+sell<=beginning_inventory_2022_September: +wheat_to_sell_2022_September <= 0;
+sell<=beginning_inventory_2022_December: +wheat_to_sell_2022_December <= 0;
+sell<=beginning_inventory_2023_March: +wheat_to_sell_2023_March <= 0;
+sell<=beginning_inventory_2023_May: +wheat_to_sell_2023_May <= 0;
+sell<=beginning_inventory_2023_July: +wheat_to_sell_2023_July <= 0;
+sell<=beginning_inventory_2023_September: +wheat_to_sell_2023_September <= 0;
+sell<=beginning_inventory_2023_December: +wheat_to_sell_2023_December <= 0;
+sell<=beginning_inventory_2024_March: +wheat_to_sell_2024_March <= 0;
+sell<=beginning_inventory_2024_July: +wheat_to_sell_2024_July <= 0;
+buy<=warehousesize_2022_July: +wheat_to_buy_2022_July <= 20000;
+buy<=warehousesize_2022_September: +wheat_to_buy_2022_September <= 20000;
+buy<=warehousesize_2022_December: +wheat_to_buy_2022_December <= 20000;
+buy<=warehousesize_2023_March: +wheat_to_buy_2023_March <= 20000;
+buy<=warehousesize_2023_May: +wheat_to_buy_2023_May <= 20000;
+buy<=warehousesize_2023_July: +wheat_to_buy_2023_July <= 20000;
+buy<=warehousesize_2023_September: +wheat_to_buy_2023_September <= 20000;
+buy<=warehousesize_2023_December: +wheat_to_buy_2023_December <= 20000;
+buy<=warehousesize_2024_March: +wheat_to_buy_2024_March <= 20000;
+buy<=warehousesize_2024_July: +wheat_to_buy_2024_July <= 20000;
+buy<=begin+demand_2022_July: +wheat_to_buy_2022_July >= 1500;
+buy<=begin+demand_2022_September: +wheat_to_buy_2022_September +ending_inventory_2022_July >= 8500;
+buy<=begin+demand_2022_December: +wheat_to_buy_2022_December +ending_inventory_2022_September >= 16350;
+buy<=begin+demand_2023_March: +wheat_to_buy_2023_March +ending_inventory_2022_December >= 17500;
+buy<=begin+demand_2023_May: +wheat_to_buy_2023_May +ending_inventory_2023_March >= 4500;
+buy<=begin+demand_2023_July: +wheat_to_buy_2023_July +ending_inventory_2023_May >= 6000;
+buy<=begin+demand_2023_September: +wheat_to_buy_2023_September +ending_inventory_2023_July >= 7000;
+buy<=begin+demand_2023_December: +wheat_to_buy_2023_December +ending_inventory_2023_September >= 8500;
+buy<=begin+demand_2024_March: +wheat_to_buy_2024_March +ending_inventory_2023_December >= 14000;
+buy<=begin+demand_2024_July: +wheat_to_buy_2024_July +ending_inventory_2024_March >= 15000;
+inventory_relationship_2022_July: +wheat_to_buy_2022_July -wheat_to_sell_2022_July -ending_inventory_2022_July = 1500;
+inventory_relationship_2022_September: +wheat_to_buy_2022_September -wheat_to_sell_2022_September +ending_inventory_2022_July -ending_inventory_2022_September = 8500;
+inventory_relationship_2022_December: +wheat_to_buy_2022_December -wheat_to_sell_2022_December +ending_inventory_2022_September -ending_inventory_2022_December = 16350;
+inventory_relationship_2023_March: +wheat_to_buy_2023_March -wheat_to_sell_2023_March +ending_inventory_2022_December -ending_inventory_2023_March = 17500;
+inventory_relationship_2023_May: +wheat_to_buy_2023_May -wheat_to_sell_2023_May +ending_inventory_2023_March -ending_inventory_2023_May = 4500;
+inventory_relationship_2023_July: +wheat_to_buy_2023_July -wheat_to_sell_2023_July +ending_inventory_2023_May -ending_inventory_2023_July = 6000;
+inventory_relationship_2023_September: +wheat_to_buy_2023_September -wheat_to_sell_2023_September +ending_inventory_2023_July -ending_inventory_2023_September = 7000;
+inventory_relationship_2023_December: +wheat_to_buy_2023_December -wheat_to_sell_2023_December +ending_inventory_2023_September -ending_inventory_2023_December = 8500;
+inventory_relationship_2024_March: +wheat_to_buy_2024_March -wheat_to_sell_2024_March +ending_inventory_2023_December -ending_inventory_2024_March = 14000;
+inventory_relationship_2024_July: +wheat_to_buy_2024_July -wheat_to_sell_2024_July +ending_inventory_2024_March -ending_inventory_2024_July = 15000;
+ending_inventory<=warehousesize_2022_July: +ending_inventory_2022_July <= 20000;
+ending_inventory<=warehousesize_2022_September: +ending_inventory_2022_September <= 20000;
+ending_inventory<=warehousesize_2022_December: +ending_inventory_2022_December <= 20000;
+ending_inventory<=warehousesize_2023_March: +ending_inventory_2023_March <= 20000;
+ending_inventory<=warehousesize_2023_May: +ending_inventory_2023_May <= 20000;
+ending_inventory<=warehousesize_2023_July: +ending_inventory_2023_July <= 20000;
+ending_inventory<=warehousesize_2023_September: +ending_inventory_2023_September <= 20000;
+ending_inventory<=warehousesize_2023_December: +ending_inventory_2023_December <= 20000;
+ending_inventory<=warehousesize_2024_March: +ending_inventory_2024_March <= 20000;
+ending_inventory<=warehousesize_2024_July: +ending_inventory_2024_July <= 20000;
